@@ -1,5 +1,5 @@
 # brexchain
-A Tutorial using Cosmos SDK and Starport built for Brex EPD Learning.
+A Tutorial using Cosmos SDK and Starport built for Brex EPD Learning Day. This presentation was originally given on behalf of the Brex Crypto Paper Reading Group.
 
 # Steps Taken
 
