@@ -24,6 +24,8 @@ export type TxnengineMsgApproveTransactionResponse = object;
 
 export type TxnengineMsgRequestTransactionResponse = object;
 
+export type TxnengineMsgSendTransactionResponse = object;
+
 /**
  * Params defines the parameters for the module.
  */

@@ -9,6 +9,7 @@ export interface RpcStatus {
 }
 export declare type TxnengineMsgApproveTransactionResponse = object;
 export declare type TxnengineMsgRequestTransactionResponse = object;
+export declare type TxnengineMsgSendTransactionResponse = object;
 /**
  * Params defines the parameters for the module.
  */

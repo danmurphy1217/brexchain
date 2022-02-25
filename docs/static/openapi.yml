@@ -12803,6 +12803,8 @@ definitions:
     type: object
   cosmonaut.brexchain.txnengine.MsgRequestTransactionResponse:
     type: object
+  cosmonaut.brexchain.txnengine.MsgSendTransactionResponse:
+    type: object
   cosmonaut.brexchain.txnengine.Params:
     type: object
     description: Params defines the parameters for the module.
