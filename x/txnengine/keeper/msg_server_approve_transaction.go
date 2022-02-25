@@ -16,7 +16,6 @@ func (k msgServer) ApproveTransaction(goCtx context.Context, msg *types.MsgAppro
 		return nil, sdkerrors.Wrapf(sdkerrors.ErrKeyNotFound, "key %d doesn't exist", msg.Id)
 	}
 
-	// TODO: for some reason the error doesn't get printed to the terminal
 	if transaction.Status != "processing" {
 		return nil, sdkerrors.Wrapf(types.ErrWrongTransactionState, "%v", transaction.Status)
 	}
@@ -27,6 +26,7 @@ func (k msgServer) ApproveTransaction(goCtx context.Context, msg *types.MsgAppro
 		return nil, sdkerrors.Wrap(types.ErrWrongTransactionState, "Cannot parse coins in transaction amount")
 	}
 
+	// transfer out of escrow account to the `receiver`
 	k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, receiver, amount)
 	transaction.Status = "approved"
 
