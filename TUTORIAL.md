@@ -7,9 +7,9 @@ cd brexchain && starport chain serve -r`
         - scaffold message: `starport scaffold message send-transaction amount fee note receiver --module txn-engine`
         - add code to `msg_server_send_transaction.go`, `expected_keepers.go`, and `errors.go`
 
-          [msg_server_send_transaction.go](url)
-          [expected_keepers.go](url)
-          [errors.go](url)
+          [msg_server_send_transaction.go](https://github.com/danmurphy1217/brexchain/blob/main/x/txnengine/keeper/msg_server_send_transaction.go)
+          [expected_keepers.go](https://github.com/danmurphy1217/brexchain/blob/main/x/txnengine/types/expected_keepers.go)
+          [errors.go](https://github.com/danmurphy1217/brexchain/blob/main/x/txnengine/types/errors.go)
 
         - test the functionality by 
            (1) taking note of the new public keys, 
@@ -20,9 +20,9 @@ cd brexchain && starport chain serve -r`
         - scaffold message: `starport scaffold message request-transaction amount fee note sender --module txn-engine`
         - add code to `msg_server_request_transaction.go`, `expected_keepers.go`, and `errors.go`
 
-          [msg_server_request_transaction.go](url)
-          [expected_keepers.go](url)
-          [errors.go](url)
+          [msg_server_request_transaction.go](https://github.com/danmurphy1217/brexchain/blob/main/x/txnengine/keeper/msg_server_request_transaction.go)
+          [expected_keepers.go](https://github.com/danmurphy1217/brexchain/blob/main/x/txnengine/types/expected_keepers.go)
+          [errors.go](https://github.com/danmurphy1217/brexchain/blob/main/x/txnengine/types/errors.go)
 
         - test the functionality by 
            (1) taking note of the new public keys, 
@@ -33,9 +33,9 @@ cd brexchain && starport chain serve -r`
         - scaffold message: `starport scaffold message approve-transaction id:uint --module txn-engine`
         - add code to `msg_server_approve_transaction.go`, `expected_keepers.go`, and `errors.go`
 
-          [msg_server_approve_transaction.go](url)
-          [expected_keepers.go](url)
-          [errors.go](url)
+          [msg_server_approve_transaction.go](https://github.com/danmurphy1217/brexchain/blob/main/x/txnengine/keeper/msg_server_approve_transaction.go)
+          [expected_keepers.go](https://github.com/danmurphy1217/brexchain/blob/main/x/txnengine/types/expected_keepers.go)
+          [errors.go](https://github.com/danmurphy1217/brexchain/blob/main/x/txnengine/types/errors.go)
 
         - test the functionality by 
            (1) checking balances with `brexchaind query bank balances [cosmos_publickey]`, and 
