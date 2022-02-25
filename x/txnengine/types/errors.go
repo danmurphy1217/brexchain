@@ -9,4 +9,5 @@ import (
 // x/txnengine module sentinel errors
 var (
 	ErrSample = sdkerrors.Register(ModuleName, 1100, "sample error")
+	ErrWrongTransactionAmount = sdkerrors.Register(ModuleName, 1, "Cannot parse Transaction.Amount")
 )

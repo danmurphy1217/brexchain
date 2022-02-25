@@ -7,7 +7,19 @@ option go_package = "github.com/cosmonaut/brexchain/x/txnengine/types";
 
 // Msg defines the Msg service.
 service Msg {
-    // this line is used by starport scaffolding # proto/tx/rpc
+      rpc RequestTransaction(MsgRequestTransaction) returns (MsgRequestTransactionResponse);
+// this line is used by starport scaffolding # proto/tx/rpc
+}
+
+message MsgRequestTransaction {
+  string creator = 1;
+  string amount = 2;
+  string fee = 3;
+  string note = 4;
+  string sender = 5;
+}
+
+message MsgRequestTransactionResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message
