@@ -12799,6 +12799,8 @@ paths:
       tags:
         - Query
 definitions:
+  cosmonaut.brexchain.txnengine.MsgApproveTransactionResponse:
+    type: object
   cosmonaut.brexchain.txnengine.MsgRequestTransactionResponse:
     type: object
   cosmonaut.brexchain.txnengine.Params:

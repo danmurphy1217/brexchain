@@ -7,6 +7,7 @@ export interface RpcStatus {
     message?: string;
     details?: ProtobufAny[];
 }
+export declare type TxnengineMsgApproveTransactionResponse = object;
 export declare type TxnengineMsgRequestTransactionResponse = object;
 /**
  * Params defines the parameters for the module.

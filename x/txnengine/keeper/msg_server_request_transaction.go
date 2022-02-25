@@ -3,13 +3,12 @@ package keeper
 import (
 	"context"
 
-    "github.com/cosmonaut/brexchain/x/txnengine/types"
+	"github.com/cosmonaut/brexchain/x/txnengine/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-
-func (k msgServer) RequestTransaction(goCtx context.Context,  msg *types.MsgRequestTransaction) (*types.MsgRequestTransactionResponse, error) {
+func (k msgServer) RequestTransaction(goCtx context.Context, msg *types.MsgRequestTransaction) (*types.MsgRequestTransactionResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var transaction = types.Transaction{
@@ -28,7 +27,7 @@ func (k msgServer) RequestTransaction(goCtx context.Context,  msg *types.MsgRequ
 		k.SetTransaction(ctx, transaction)
 		return nil, sdkerrors.Wrap(types.ErrWrongTransactionAmount, "Cannot parse coins in transaction amount")
 	}
-	
+
 	// Use the module account as escrow account
 	sdkError := k.bankKeeper.SendCoinsFromAccountToModule(ctx, sender, types.ModuleName, amount)
 	if sdkError != nil {

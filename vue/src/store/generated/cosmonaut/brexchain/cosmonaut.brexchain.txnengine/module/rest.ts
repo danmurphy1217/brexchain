@@ -20,6 +20,8 @@ export interface RpcStatus {
   details?: ProtobufAny[];
 }
 
+export type TxnengineMsgApproveTransactionResponse = object;
+
 export type TxnengineMsgRequestTransactionResponse = object;
 
 /**

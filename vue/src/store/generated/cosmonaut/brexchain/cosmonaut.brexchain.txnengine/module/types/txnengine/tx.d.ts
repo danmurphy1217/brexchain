@@ -9,6 +9,12 @@ export interface MsgRequestTransaction {
 }
 export interface MsgRequestTransactionResponse {
 }
+export interface MsgApproveTransaction {
+    creator: string;
+    id: number;
+}
+export interface MsgApproveTransactionResponse {
+}
 export declare const MsgRequestTransaction: {
     encode(message: MsgRequestTransaction, writer?: Writer): Writer;
     decode(input: Reader | Uint8Array, length?: number): MsgRequestTransaction;
@@ -23,15 +29,31 @@ export declare const MsgRequestTransactionResponse: {
     toJSON(_: MsgRequestTransactionResponse): unknown;
     fromPartial(_: DeepPartial<MsgRequestTransactionResponse>): MsgRequestTransactionResponse;
 };
+export declare const MsgApproveTransaction: {
+    encode(message: MsgApproveTransaction, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgApproveTransaction;
+    fromJSON(object: any): MsgApproveTransaction;
+    toJSON(message: MsgApproveTransaction): unknown;
+    fromPartial(object: DeepPartial<MsgApproveTransaction>): MsgApproveTransaction;
+};
+export declare const MsgApproveTransactionResponse: {
+    encode(_: MsgApproveTransactionResponse, writer?: Writer): Writer;
+    decode(input: Reader | Uint8Array, length?: number): MsgApproveTransactionResponse;
+    fromJSON(_: any): MsgApproveTransactionResponse;
+    toJSON(_: MsgApproveTransactionResponse): unknown;
+    fromPartial(_: DeepPartial<MsgApproveTransactionResponse>): MsgApproveTransactionResponse;
+};
 /** Msg defines the Msg service. */
 export interface Msg {
-    /** this line is used by starport scaffolding # proto/tx/rpc */
     RequestTransaction(request: MsgRequestTransaction): Promise<MsgRequestTransactionResponse>;
+    /** this line is used by starport scaffolding # proto/tx/rpc */
+    ApproveTransaction(request: MsgApproveTransaction): Promise<MsgApproveTransactionResponse>;
 }
 export declare class MsgClientImpl implements Msg {
     private readonly rpc;
     constructor(rpc: Rpc);
     RequestTransaction(request: MsgRequestTransaction): Promise<MsgRequestTransactionResponse>;
+    ApproveTransaction(request: MsgApproveTransaction): Promise<MsgApproveTransactionResponse>;
 }
 interface Rpc {
     request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;

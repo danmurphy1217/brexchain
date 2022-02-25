@@ -9,12 +9,16 @@ import (
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgRequestTransaction{}, "txnengine/RequestTransaction", nil)
+	cdc.RegisterConcrete(&MsgApproveTransaction{}, "txnengine/ApproveTransaction", nil)
 	// this line is used by starport scaffolding # 2
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgRequestTransaction{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgApproveTransaction{},
 	)
 	// this line is used by starport scaffolding # 3
 
