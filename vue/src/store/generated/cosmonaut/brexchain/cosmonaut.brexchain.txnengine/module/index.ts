@@ -4,15 +4,17 @@ import { StdFee } from "@cosmjs/launchpad";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
-import { MsgRequestTransaction } from "./types/txnengine/tx";
-import { MsgApproveTransaction } from "./types/txnengine/tx";
 import { MsgSendTransaction } from "./types/txnengine/tx";
+import { MsgApproveTransaction } from "./types/txnengine/tx";
+import { MsgRejectTransaction } from "./types/txnengine/tx";
+import { MsgRequestTransaction } from "./types/txnengine/tx";
 
 
 const types = [
-  ["/cosmonaut.brexchain.txnengine.MsgRequestTransaction", MsgRequestTransaction],
-  ["/cosmonaut.brexchain.txnengine.MsgApproveTransaction", MsgApproveTransaction],
   ["/cosmonaut.brexchain.txnengine.MsgSendTransaction", MsgSendTransaction],
+  ["/cosmonaut.brexchain.txnengine.MsgApproveTransaction", MsgApproveTransaction],
+  ["/cosmonaut.brexchain.txnengine.MsgRejectTransaction", MsgRejectTransaction],
+  ["/cosmonaut.brexchain.txnengine.MsgRequestTransaction", MsgRequestTransaction],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -45,9 +47,10 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
-    msgRequestTransaction: (data: MsgRequestTransaction): EncodeObject => ({ typeUrl: "/cosmonaut.brexchain.txnengine.MsgRequestTransaction", value: MsgRequestTransaction.fromPartial( data ) }),
-    msgApproveTransaction: (data: MsgApproveTransaction): EncodeObject => ({ typeUrl: "/cosmonaut.brexchain.txnengine.MsgApproveTransaction", value: MsgApproveTransaction.fromPartial( data ) }),
     msgSendTransaction: (data: MsgSendTransaction): EncodeObject => ({ typeUrl: "/cosmonaut.brexchain.txnengine.MsgSendTransaction", value: MsgSendTransaction.fromPartial( data ) }),
+    msgApproveTransaction: (data: MsgApproveTransaction): EncodeObject => ({ typeUrl: "/cosmonaut.brexchain.txnengine.MsgApproveTransaction", value: MsgApproveTransaction.fromPartial( data ) }),
+    msgRejectTransaction: (data: MsgRejectTransaction): EncodeObject => ({ typeUrl: "/cosmonaut.brexchain.txnengine.MsgRejectTransaction", value: MsgRejectTransaction.fromPartial( data ) }),
+    msgRequestTransaction: (data: MsgRequestTransaction): EncodeObject => ({ typeUrl: "/cosmonaut.brexchain.txnengine.MsgRequestTransaction", value: MsgRequestTransaction.fromPartial( data ) }),
     
   };
 };

@@ -31,6 +31,13 @@ export interface MsgSendTransaction {
 
 export interface MsgSendTransactionResponse {}
 
+export interface MsgRejectTransaction {
+  creator: string;
+  id: number;
+}
+
+export interface MsgRejectTransactionResponse {}
+
 const baseMsgRequestTransaction: object = {
   creator: "",
   amount: "",
@@ -530,6 +537,133 @@ export const MsgSendTransactionResponse = {
   },
 };
 
+const baseMsgRejectTransaction: object = { creator: "", id: 0 };
+
+export const MsgRejectTransaction = {
+  encode(
+    message: MsgRejectTransaction,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.id !== 0) {
+      writer.uint32(16).uint64(message.id);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgRejectTransaction {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgRejectTransaction } as MsgRejectTransaction;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.id = longToNumber(reader.uint64() as Long);
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgRejectTransaction {
+    const message = { ...baseMsgRejectTransaction } as MsgRejectTransaction;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = Number(object.id);
+    } else {
+      message.id = 0;
+    }
+    return message;
+  },
+
+  toJSON(message: MsgRejectTransaction): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.id !== undefined && (obj.id = message.id);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgRejectTransaction>): MsgRejectTransaction {
+    const message = { ...baseMsgRejectTransaction } as MsgRejectTransaction;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    } else {
+      message.id = 0;
+    }
+    return message;
+  },
+};
+
+const baseMsgRejectTransactionResponse: object = {};
+
+export const MsgRejectTransactionResponse = {
+  encode(
+    _: MsgRejectTransactionResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): MsgRejectTransactionResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseMsgRejectTransactionResponse,
+    } as MsgRejectTransactionResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgRejectTransactionResponse {
+    const message = {
+      ...baseMsgRejectTransactionResponse,
+    } as MsgRejectTransactionResponse;
+    return message;
+  },
+
+  toJSON(_: MsgRejectTransactionResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<MsgRejectTransactionResponse>
+  ): MsgRejectTransactionResponse {
+    const message = {
+      ...baseMsgRejectTransactionResponse,
+    } as MsgRejectTransactionResponse;
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   RequestTransaction(
@@ -538,10 +672,13 @@ export interface Msg {
   ApproveTransaction(
     request: MsgApproveTransaction
   ): Promise<MsgApproveTransactionResponse>;
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   SendTransaction(
     request: MsgSendTransaction
   ): Promise<MsgSendTransactionResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  RejectTransaction(
+    request: MsgRejectTransaction
+  ): Promise<MsgRejectTransactionResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -588,6 +725,20 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then((data) =>
       MsgSendTransactionResponse.decode(new Reader(data))
+    );
+  }
+
+  RejectTransaction(
+    request: MsgRejectTransaction
+  ): Promise<MsgRejectTransactionResponse> {
+    const data = MsgRejectTransaction.encode(request).finish();
+    const promise = this.rpc.request(
+      "cosmonaut.brexchain.txnengine.Msg",
+      "RejectTransaction",
+      data
+    );
+    return promise.then((data) =>
+      MsgRejectTransactionResponse.decode(new Reader(data))
     );
   }
 }

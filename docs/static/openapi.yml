@@ -12801,6 +12801,8 @@ paths:
 definitions:
   cosmonaut.brexchain.txnengine.MsgApproveTransactionResponse:
     type: object
+  cosmonaut.brexchain.txnengine.MsgRejectTransactionResponse:
+    type: object
   cosmonaut.brexchain.txnengine.MsgRequestTransactionResponse:
     type: object
   cosmonaut.brexchain.txnengine.MsgSendTransactionResponse:

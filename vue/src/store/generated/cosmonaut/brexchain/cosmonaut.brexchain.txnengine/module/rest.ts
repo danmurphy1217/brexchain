@@ -22,6 +22,8 @@ export interface RpcStatus {
 
 export type TxnengineMsgApproveTransactionResponse = object;
 
+export type TxnengineMsgRejectTransactionResponse = object;
+
 export type TxnengineMsgRequestTransactionResponse = object;
 
 export type TxnengineMsgSendTransactionResponse = object;

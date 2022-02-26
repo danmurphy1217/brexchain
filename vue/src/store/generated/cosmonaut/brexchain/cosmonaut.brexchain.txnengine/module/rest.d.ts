@@ -8,6 +8,7 @@ export interface RpcStatus {
     details?: ProtobufAny[];
 }
 export declare type TxnengineMsgApproveTransactionResponse = object;
+export declare type TxnengineMsgRejectTransactionResponse = object;
 export declare type TxnengineMsgRequestTransactionResponse = object;
 export declare type TxnengineMsgSendTransactionResponse = object;
 /**

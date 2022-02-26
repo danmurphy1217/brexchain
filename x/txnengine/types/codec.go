@@ -11,6 +11,7 @@ func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgRequestTransaction{}, "txnengine/RequestTransaction", nil)
 	cdc.RegisterConcrete(&MsgApproveTransaction{}, "txnengine/ApproveTransaction", nil)
 	cdc.RegisterConcrete(&MsgSendTransaction{}, "txnengine/SendTransaction", nil)
+	cdc.RegisterConcrete(&MsgRejectTransaction{}, "txnengine/RejectTransaction", nil)
 	// this line is used by starport scaffolding # 2
 }
 
@@ -23,6 +24,9 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgSendTransaction{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgRejectTransaction{},
 	)
 	// this line is used by starport scaffolding # 3
 
